@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product"); 
-
+const ProductController = require("../controllers/productControllers");
 
 
 //POST /dashboard: Crea un nuevo producto CHEK 
@@ -16,51 +16,18 @@ router.post("/dashboard", async (req, res) => {
     }
 });
 
-//GET /products: CHEK PERO Cada producto tendrá un enlace a su página de detalle.PEN --->front
-router.get("/products", async (req, res) => {
-    try {
-        const getProducts = await Product.find();
-        res.status(200).send(getProducts);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({ message: "There was a problem geting the products" });
-    }
-});
+router.get("/products", ProductController.showProducts) 
 
-//GET /dashboard: Devuelve el dashboard del administrador. En el dashboard aparecerán todos los artículos que se hayan subido. 
-router.get("/dashboard", async (req, res) => {
-    try {
-        const getProducts = await Product.find();
-        res.status(200).send(getProducts);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({ message: "There was a problem geting the products" });
-    }
-});
 
-//GET /products/:productId: Devuelve el detalle de un producto CHEK
-router.get("/products/:productId", async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.productId);
-        if (!product) return res.status(404).send({ message: "Product not found." });
-        res.status(200).send(product);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({ message: "There was a problem geting the product." });
-    }
-});
+router.get("/dashboard", ProductController.showProducts);
+ 
 
-//GET /dashboard/:productId: Devuelve el detalle de un producto en el dashboard.
-router.get("/dashboard/:productId", async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.productId);
-        if (!product) return res.status(404).send({ message: "Product not found." });
-        res.status(200).send(product);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({ message: "There was a problem geting the product." });
-    }
-});
+router.get("/products/:productId", ProductController.showProductById)
+
+
+
+router.get("/dashboard/:productId", ProductController.showProductById); //--> solo pediente el detalle en la ruta dashboard (no products->funcion)
+
 
 //PUT /dashboard/:productId: Actualiza un producto.
 router.put("/dashboard/:productId", async (req, res) => {
@@ -84,14 +51,7 @@ router.put("/dashboard/:productId", async (req, res) => {
 });
 
 //DELETE /dashboard/:productId/delete: Elimina un producto.
-router.delete("/dashboard/:productId/delete", async (req, res) => {
-try {
-    const idProduct = req.params.productId
-    const deleteProduct = await Product.findByIdAndDelete(idProduct)
-    res.json({mensaje: "Product deleted", deleteProduct})
-  } catch (err) {
-    console.error("Could not delete the product: ", err)
-  }
-});
+router.delete("/dashboard/:productId/delete", ProductController.deleteProduct) //->>>pen porque no es get
+
 
 module.exports = router;
