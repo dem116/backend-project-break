@@ -30,9 +30,6 @@ const ProductController = {
                                 <h2>${product.nombre}</h2>
                                 <img src="${product.imagen || ''}" alt="${product.nombre}"  width="200">
                                 <p>Precio: ${product.precio}</p>
-                                <p>Talla: ${product.talla}</p>
-                                <p>Descripción: ${product.descripcion}</p>
-                                <p>Categoría: ${product.categoria}</p>
                                 <a href="${isDashboard ? `/dashboard/${product._id}` : `/products/${product._id}`}">Ver detalle</a>
                             </li>
                         `).join('')}
