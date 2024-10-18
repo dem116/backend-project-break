@@ -11,6 +11,7 @@ Este proyecto implementa una tienda de ropa con un catálogo de productos y un p
 express: Framework para crear el servidor.
 mongoose: para manejar MongoDB.
 dotenv: Carga variables de entorno desde un archivo .env.
+swagger-ui-express: para documentar la API
 
 ## Estrcutura del proyecto (bash)
 ├── config/
@@ -26,6 +27,11 @@ dotenv: Carga variables de entorno desde un archivo .env.
 ├── .env                     # Variables de entorno
 ├── index.js                 # Archivo principal del servidor
 └── package.json             # Configuración del proyecto y dependencias
+└── docs/          
+    └── basicInfo.js        # Información basica de la api y documentación con swagger
+    └── components.js       # Componentes y esquemas de la API
+    └── index.js            # Configuración y exportacion de la documentacion de la API con swagger  
+    └── products.js         # Documentacion de los endpoints de la API con swaggger
 
 
 ### Instalación:

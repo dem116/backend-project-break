@@ -21,15 +21,16 @@ const ProductController = {
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <title>${isDashboard ? "Dashboard - Products" : "Products"}</title>
+                    <link rel="stylesheet" href="/style.css">
                 </head>
                 <body>
                     <h1>${isDashboard ? "Dashboard - Products" : "Products"}</h1>
-                    <ul>
+                    <ul class="product-list">
                         ${products.map(product => `
-                            <li>
+                            <li class="product-item">
                                 <h2>${product.nombre}</h2>
                                 <img src="${product.imagen || ''}" alt="${product.nombre}"  width="200">
-                                <p>Precio: ${product.precio}</p>
+                                <p>Precio: ${product.precio} €</p>
                                 <a href="${isDashboard ? `/dashboard/${product._id}` : `/products/${product._id}`}">Ver detalle</a>
                             </li>
                         `).join('')}
@@ -61,13 +62,15 @@ const ProductController = {
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>${product.nombre}</title>
+                <link rel="stylesheet" href="/style2.css">
             </head>
             <body>
+              <div>
                 <h1>${product.nombre}</h1>
                 <img src="${product.imagen}" alt="${product.nombre}"  width="200"/>
-                <p>${product.descripcion}</p><br>
-                <p>Talla: ${product.talla}</p><br>
-                <p>Precio: ${product.precio}</p>
+                <p>${product.descripcion}</p>
+                <p>Talla: ${product.talla}</p>
+                <p>Precio: ${product.precio} €</p>
                 <p>Categoría: ${product.categoria}</p>
       
                 ${isDashboard ? `
@@ -75,7 +78,7 @@ const ProductController = {
                   <button onclick="deleteProduct('${product._id}')">Eliminar producto</button>
                    <p id="error-message" style="color: red;"></p>
                 ` : ''}
-                
+              </div>
                 <script>
                   async function deleteProduct(productId) {
                     if (!confirm('¿Estás seguro de que deseas eliminar este producto?')) {
