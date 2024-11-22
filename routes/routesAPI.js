@@ -1,17 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const Product = require("../models/Product"); 
-const controllersAPI = require("../controllers/controllersAPI");
+const ListaCompra = require("../models/ListaCompra"); 
+const controllers = require("../controllers/controllers");
 
 
 
-router.get("/products", controllersAPI.showProducts)
-router.get("/products/:productId", controllersAPI.showProductById)
+router.get("/listacompra", controllers.showList)
+//router.get("/products/:productId", controllersAPI.showProductById)
 
-router.get("/dashboard", controllersAPI.showProducts)
-router.post("/dashboard", controllersAPI.createProduct)
-router.get("/dashboard/:productId", controllersAPI.showProductById)
-router.put("/dashboard/:productId", controllersAPI.updateProduct)
-router.delete("/dashboard/:productId/delete", controllersAPI.deleteProduct)
+//router.get("/dashboard", controllersAPI.showProducts)
+router.post("/createitem", controllers.createListItem)
+//router.get("/dashboard/:productId", controllersAPI.showProductById)
+//router.put("/dashboard/:productId", controllersAPI.updateProduct)
+//router.delete("/dashboard/:productId/delete", controllersAPI.deleteProduct)
 
 module.exports = router;
